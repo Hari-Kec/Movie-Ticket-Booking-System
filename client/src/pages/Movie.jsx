@@ -22,7 +22,7 @@ const Movie = () => {
 	const [isFetchingMoviesDone, setIsFetchingMoviesDone] = useState(false)
 	const [isAddingMovie, SetIsAddingMovie] = useState(false)
 
-	const fetchMovies = async (data) => {
+	const fetchMovies = async () => {
 		try {
 			setIsFetchingMoviesDone(false)
 			const response = await axios.get('/movie')
@@ -43,20 +43,20 @@ const Movie = () => {
 		try {
 			data.length = (parseInt(data.lengthHr) || 0) * 60 + (parseInt(data.lengthMin) || 0)
 			SetIsAddingMovie(true)
-			const response = await axios.post('/movie', data, {
+			await axios.post('/movie', data, {
 				headers: {
 					Authorization: `Bearer ${auth.token}`
 				}
 			})
 			fetchMovies()
-			toast.success('Add movie successful!', {
+			toast.success('Movie added!', {
 				position: 'top-center',
 				autoClose: 2000,
 				pauseOnHover: false
 			})
 		} catch (error) {
 			console.error(error)
-			toast.error('Error', {
+			toast.error('Error adding movie', {
 				position: 'top-center',
 				autoClose: 2000,
 				pauseOnHover: false
@@ -68,7 +68,7 @@ const Movie = () => {
 
 	const handleDelete = (movie) => {
 		const confirmed = window.confirm(
-			`Do you want to delete movie ${movie.name}, including its showtimes and tickets?`
+			`Delete movie ${movie.name} with all showtimes and tickets?`
 		)
 		if (confirmed) {
 			onDeleteMovie(movie._id)
@@ -77,20 +77,20 @@ const Movie = () => {
 
 	const onDeleteMovie = async (id) => {
 		try {
-			const response = await axios.delete(`/movie/${id}`, {
+			await axios.delete(`/movie/${id}`, {
 				headers: {
 					Authorization: `Bearer ${auth.token}`
 				}
 			})
 			fetchMovies()
-			toast.success('Delete movie successful!', {
+			toast.success('Movie deleted!', {
 				position: 'top-center',
 				autoClose: 2000,
 				pauseOnHover: false
 			})
 		} catch (error) {
 			console.error(error)
-			toast.error('Error', {
+			toast.error('Error deleting movie', {
 				position: 'top-center',
 				autoClose: 2000,
 				pauseOnHover: false
@@ -105,80 +105,79 @@ const Movie = () => {
 	const min = sumMin % 60
 
 	return (
-		<div className="flex min-h-screen flex-col gap-6 bg-gradient-to-b from-white to-gray-200 pb-10 text-gray-900">
+		<div className="min-h-screen bg-gradient-to-tr from-white via-pink-50 to-purple-50 text-gray-800 flex flex-col">
 			<Navbar />
-			<div className="mx-auto w-full max-w-6xl p-6 bg-white shadow-xl rounded-2xl space-y-6">
-				<h2 className="text-4xl font-bold text-center text-gray-800">Movie Management</h2>
-				<form
-					onSubmit={handleSubmit(onAddMovie)}
-					className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"
-				>
-					<div className="space-y-4">
-						<h3 className="text-xl font-semibold text-gray-700">Add New Movie</h3>
+			<div className="max-w-7xl mx-auto w-full px-8 py-12">
+				<h2 className="text-5xl font-extrabold mb-10 text-center">Manage Movies</h2>
+				<div className="grid md:grid-cols-2 gap-12">
+					<form onSubmit={handleSubmit(onAddMovie)} className="bg-white p-8 shadow-2xl rounded-3xl space-y-6 border border-gray-200">
+						<h3 className="text-2xl font-semibold text-center">Add New Movie</h3>
 						<input
 							type="text"
 							placeholder="Movie Name"
 							required
-							className="w-full rounded-lg border-gray-300 px-4 py-2 shadow-sm focus:ring-2 focus:ring-blue-400"
+							className="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-purple-400"
 							{...register('name', { required: true })}
 						/>
 						<input
 							type="text"
 							placeholder="Poster URL"
 							required
-							className="w-full rounded-lg border-gray-300 px-4 py-2 shadow-sm focus:ring-2 focus:ring-blue-400"
+							className="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-purple-400"
 							{...register('img', { required: true })}
 						/>
-						<input
-							type="number"
-							min="0"
-							max="20"
-							placeholder="Length (Hours)"
-							className="w-full rounded-lg border-gray-300 px-4 py-2 shadow-sm focus:ring-2 focus:ring-blue-400"
-							{...register('lengthHr')}
-						/>
-						<input
-							type="number"
-							min="0"
-							max="2000"
-							placeholder="Length (Minutes)"
-							required
-							className="w-full rounded-lg border-gray-300 px-4 py-2 shadow-sm focus:ring-2 focus:ring-blue-400"
-							{...register('lengthMin', { required: true })}
-						/>
-						<p className="text-gray-500">{`${hr}h ${min}m / ${sumMin} minutes`}</p>
-					</div>
-					{watch('img') && (
-						<div className="flex items-center justify-center">
-							<img src={watch('img')} className="h-64 rounded-xl shadow-md object-contain" />
+						<div className="flex gap-4">
+							<input
+								type="number"
+								min="0"
+								max="20"
+								placeholder="Hours"
+								className="w-1/2 border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-purple-400"
+								{...register('lengthHr')}
+							/>
+							<input
+								type="number"
+								min="0"
+								max="2000"
+								placeholder="Minutes"
+								required
+								className="w-1/2 border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-purple-400"
+								{...register('lengthMin', { required: true })}
+							/>
 						</div>
-					)}
-					<div className="flex items-end justify-center">
+						<p className="text-center text-gray-500">{`${hr}h ${min}m | ${sumMin} mins`}</p>
+						{watch('img') && (
+							<div className="flex justify-center">
+								<img src={watch('img')} className="h-56 rounded-xl object-contain shadow-xl" />
+							</div>
+						)}
 						<button
 							type="submit"
 							disabled={isAddingMovie}
-							className="w-full rounded-lg bg-blue-600 px-6 py-3 text-white text-lg font-medium shadow-md hover:bg-blue-700 disabled:opacity-50"
+							className="w-full bg-purple-600 hover:bg-purple-700 text-white py-3 text-lg font-semibold rounded-2xl transition"
 						>
 							{isAddingMovie ? 'Adding...' : 'Add Movie'}
 						</button>
+					</form>
+					<div>
+						<div className="relative mb-6">
+							<div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+								<MagnifyingGlassIcon className="h-6 w-6 text-gray-400" />
+							</div>
+							<input
+								type="search"
+								placeholder="Search movies"
+								className="w-full border border-gray-300 rounded-xl pl-12 pr-4 py-3 focus:ring-2 focus:ring-purple-400"
+								{...register('search')}
+							/>
+						</div>
+						{isFetchingMoviesDone ? (
+							<MovieLists movies={movies} search={watch('search')} handleDelete={handleDelete} />
+						) : (
+							<Loading />
+						)}
 					</div>
-				</form>
-				<div className="relative mt-8">
-					<div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-						<MagnifyingGlassIcon className="h-5 w-5 text-gray-400" />
-					</div>
-					<input
-						type="search"
-						placeholder="Search movie..."
-						className="w-full rounded-lg border border-gray-300 pl-10 pr-4 py-2 shadow-sm focus:ring-2 focus:ring-blue-400"
-						{...register('search')}
-					/>
 				</div>
-				{isFetchingMoviesDone ? (
-					<MovieLists movies={movies} search={watch('search')} handleDelete={handleDelete} />
-				) : (
-					<Loading />
-				)}
 			</div>
 		</div>
 	)

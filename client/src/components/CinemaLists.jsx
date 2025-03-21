@@ -89,17 +89,17 @@ const CinemaLists = ({
 
 	return (
 		<>
-			<div className="mx-4 flex h-fit flex-col gap-4 rounded-md bg-gradient-to-br from-indigo-200 to-blue-100 p-4 text-gray-900 drop-shadow-xl sm:mx-8 sm:p-6">
+			<div className="mx-4 flex h-fit flex-col gap-4 rounded-md bg-gray-800 p-4 text-white shadow-2xl sm:mx-8 sm:p-6">
 				<form
 					className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2"
 					onSubmit={handleSubmit(onAddCinema)}
 				>
-					<h2 className="text-3xl font-bold">Cinema Lists</h2>
+					<h2 className="text-3xl font-bold text-white">Cinema Lists</h2>
 					{auth.role === 'admin' && (
 						<div className="flex w-fit grow sm:justify-end">
 							<input
 								placeholder="Type a cinema name"
-								className="w-full grow rounded-l border border-gray-300 px-3 py-1 sm:max-w-xs"
+								className="w-full grow rounded-l border border-gray-600 bg-gray-700 px-3 py-1 text-white placeholder-gray-400 focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs"
 								required
 								{...register('name', { required: true })}
 							/>
@@ -114,11 +114,11 @@ const CinemaLists = ({
 				</form>
 				<div className="relative">
 					<div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-						<MagnifyingGlassIcon className="h-5 w-5 stroke-2 text-gray-500" />
+						<MagnifyingGlassIcon className="h-5 w-5 stroke-2 text-gray-400" />
 					</div>
 					<input
 						type="search"
-						className="block w-full rounded-lg border border-gray-300 p-2 pl-10 text-gray-900"
+						className="block w-full rounded-lg border border-gray-600 bg-gray-700 p-2 pl-10 text-white placeholder-gray-400 focus:border-indigo-500 focus:ring-indigo-500"
 						placeholder="Search cinema"
 						{...register('search')}
 					/>
@@ -132,7 +132,7 @@ const CinemaLists = ({
 				)}
 			</div>
 		</>
-	)
+	);
 }
 
 export default CinemaLists

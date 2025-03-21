@@ -117,19 +117,22 @@ const DateSelector = ({ selectedDate, setSelectedDate }) => {
 
 	return (
 		<div className="flex flex-col gap-2">
-			<div className="relative flex items-stretch justify-between gap-2 rounded-md bg-gradient-to-br from-indigo-800 to-blue-700 p-2 font-semibold text-white">
+			{/* Date Navigation Bar */}
+			<div className="relative flex items-stretch justify-between gap-2 rounded-md bg-gray-800 p-2 font-semibold text-white shadow-lg">
+				{/* Previous Day Button */}
 				{auth.role === 'admin' || !isPast(new Date().setDate(selectedDate.getDate() - 1)) ? (
 					<button
 						title="Go to yesterday"
-						className={'rounded hover:bg-gradient-to-br hover:from-indigo-600 hover:to-blue-600'}
+						className="rounded p-1 hover:bg-gray-700 transition-all duration-200"
 						onClick={handlePrevDay}
 					>
-						<ChevronLeftIcon className="h-10 w-10 text-white" />
+						<ChevronLeftIcon className="h-10 w-10 text-indigo-400 hover:text-indigo-300" />
 					</button>
 				) : (
 					<div className="h-10 w-10"></div>
 				)}
-
+	
+				{/* Date Input or Display */}
 				{isEditing ? (
 					<div className="w-full" ref={wrapperRef}>
 						<input
@@ -138,7 +141,7 @@ const DateSelector = ({ selectedDate, setSelectedDate }) => {
 							min={auth.role !== 'admin' && new Date().toLocaleDateString('en-CA')}
 							required
 							autoFocus
-							className={`w-full rounded border border-white bg-gradient-to-br from-indigo-800 to-blue-700 px-1 text-center text-2xl font-semibold drop-shadow-sm sm:text-3xl`}
+							className="w-full rounded border border-gray-600 bg-gray-700 px-2 py-1 text-center text-2xl font-semibold text-white focus:border-indigo-500 focus:ring-indigo-500 sm:text-3xl"
 							value={selectedDate.toLocaleDateString('en-CA')}
 							onChange={handleChange}
 							style={{ colorScheme: 'dark' }}
@@ -146,39 +149,42 @@ const DateSelector = ({ selectedDate, setSelectedDate }) => {
 					</div>
 				) : (
 					<div
-						className="flex w-full items-center justify-center rounded text-center text-xl hover:bg-gradient-to-br hover:from-indigo-600 hover:to-blue-600 sm:text-2xl"
+						className="flex w-full cursor-pointer items-center justify-center rounded text-center text-xl text-white hover:bg-gray-700 transition-all duration-200 sm:text-2xl"
 						onClick={() => {
-							SetIsEditing(true)
+							SetIsEditing(true);
 						}}
 					>
 						{formatDate(selectedDate)}
 					</div>
 				)}
-
+	
+				{/* Next Day and Today Buttons */}
 				<div className="flex items-center justify-between gap-2">
 					<button
 						title="Go to tomorrow"
-						className="rounded hover:bg-gradient-to-br hover:from-indigo-600 hover:to-blue-600"
+						className="rounded p-1 hover:bg-gray-700 transition-all duration-200"
 						onClick={handleNextDay}
 					>
-						<ChevronRightIcon className="h-10 w-10 text-white" />
+						<ChevronRightIcon className="h-10 w-10 text-indigo-400 hover:text-indigo-300" />
 					</button>
 					<button
 						title="Go to today"
-						className="rounded px-1 hover:bg-gradient-to-br hover:from-indigo-600 hover:to-blue-600"
+						className="rounded p-1 hover:bg-gray-700 transition-all duration-200"
 						onClick={handleToday}
 					>
-						<ArrowPathIcon className="h-10 w-10 text-white" />
+						<ArrowPathIcon className="h-10 w-10 text-indigo-400 hover:text-indigo-300" />
 					</button>
 				</div>
 			</div>
+	
+			{/* Date Range Shortcuts */}
 			<div className="flex gap-2 overflow-auto">
 				{getPastAndNextDateRange().map((date, index) => (
 					<DateShort key={index} date={date} selectedDate={selectedDate} />
 				))}
 			</div>
 		</div>
-	)
+	);
 }
 
 export default DateSelector

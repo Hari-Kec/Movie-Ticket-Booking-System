@@ -18,7 +18,7 @@ const Purchase = () => {
 
   const onPurchase = async () => {
     if (!paymentMethod || !paymentDetails) {
-      toast.error('Please enter payment details', { position: 'top-center', autoClose: 2000, pauseOnHover: false })
+      toast.error('Enter payment details', { position: 'top-center', autoClose: 2000, pauseOnHover: false })
       return
     }
     setIsPurchasing(true)
@@ -33,40 +33,34 @@ const Purchase = () => {
         }
       )
       navigate('/cinema')
-      toast.success('Purchase successful!', {
-        position: 'top-center',
-        autoClose: 2000,
-        pauseOnHover: false
-      })
+      toast.success('Purchase successful!', { position: 'top-center', autoClose: 2000, pauseOnHover: false })
     } catch (error) {
-      toast.error(error.response.data.message || 'Error occurred', {
-        position: 'top-center',
-        autoClose: 2000,
-        pauseOnHover: false
-      })
+      toast.error(error.response.data.message || 'Error occurred', { position: 'top-center', autoClose: 2000, pauseOnHover: false })
     } finally {
       setIsPurchasing(false)
     }
   }
 
   return (
-    <div className="flex min-h-screen flex-col bg-white pb-10">
+    <div className="flex min-h-screen flex-col bg-gradient-to-r from-red-50 to-white text-gray-800">
       <Navbar />
-      <div className="mx-auto my-6 w-11/12 rounded-xl bg-gray-50 p-6">
+      <div className="mx-auto w-full max-w-5xl p-8 bg-white rounded-3xl shadow-2xl mt-10">
+        <h1 className="text-3xl font-extrabold text-center mb-6">Confirm Your Purchase</h1>
         <ShowtimeDetails showtime={showtime} />
-        <div className="mt-6 flex flex-col gap-4 rounded-xl border-t border-gray-300 p-4">
-          <div>
-            <p className="text-lg font-bold">Selected Seats:</p>
-            <p className="text-gray-700">{selectedSeats.join(', ')}</p>
-            {!!selectedSeats.length && <p className="text-sm text-gray-500">({selectedSeats.length} seats)</p>}
+        <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="bg-gray-100 p-6 rounded-xl shadow-inner">
+            <h2 className="text-xl font-bold mb-4">Your Selection</h2>
+            <p className="mb-2">Selected Seats: <span className="font-semibold">{selectedSeats.join(', ')}</span></p>
+            {!!selectedSeats.length && <p className="text-sm text-gray-500">Total Seats: {selectedSeats.length}</p>}
           </div>
-          <div className="flex flex-col gap-4">
+          <div className="bg-gray-100 p-6 rounded-xl shadow-inner">
+            <h2 className="text-xl font-bold mb-4">Payment Information</h2>
             <select
               value={paymentMethod}
               onChange={(e) => setPaymentMethod(e.target.value)}
-              className="rounded-md border p-2"
+              className="w-full rounded-lg border-gray-300 p-3 mb-4 focus:ring-2 focus:ring-blue-400"
             >
-              <option value="">Select Payment Method</option>
+              <option value="">Choose Payment Method</option>
               <option value="upi">UPI</option>
               <option value="card">Card</option>
             </select>
@@ -76,16 +70,16 @@ const Purchase = () => {
                 placeholder={paymentMethod === 'upi' ? 'Enter UPI ID' : 'Enter Card Number'}
                 value={paymentDetails}
                 onChange={(e) => setPaymentDetails(e.target.value)}
-                className="rounded-md border p-2"
+                className="w-full rounded-lg border-gray-300 p-3 mb-4 focus:ring-2 focus:ring-blue-400"
               />
             )}
             {!!selectedSeats.length && (
               <button
                 onClick={onPurchase}
-                className="rounded-lg bg-blue-600 px-6 py-2 text-white hover:bg-blue-500 disabled:opacity-50"
+                className="w-full bg-gradient-to-r from-red-500 to-indigo-500 text-white py-3 rounded-lg text-lg font-medium hover:opacity-90 disabled:opacity-50"
                 disabled={isPurchasing}
               >
-                {isPurchasing ? 'Processing...' : 'Confirm Purchase'}
+                {isPurchasing ? 'Processing...' : 'Complete Purchase'}
               </button>
             )}
           </div>

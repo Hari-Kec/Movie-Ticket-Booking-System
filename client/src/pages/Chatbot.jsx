@@ -2,12 +2,10 @@ import { useState } from 'react'
 import axios from 'axios'
 import { Send, Bot, User } from 'lucide-react'
 import { motion } from 'framer-motion'
-
 const Chatbot = () => {
 	const [isOpen, setIsOpen] = useState(false)
 	const [query, setQuery] = useState('')
 	const [messages, setMessages] = useState([])
-
 	const handleSend = async () => {
 		if (!query.trim()) return
 		const userMsg = { sender: 'user', text: query }
@@ -16,7 +14,6 @@ const Chatbot = () => {
 		setMessages((prev) => [...prev, { sender: 'bot', text: res.data.response }])
 		setQuery('')
 	}
-
 	return (
 		<div className="fixed bottom-5 right-5 z-50">
 			{isOpen && (
@@ -74,5 +71,4 @@ const Chatbot = () => {
 		</div>
 	)
 }
-
 export default Chatbot

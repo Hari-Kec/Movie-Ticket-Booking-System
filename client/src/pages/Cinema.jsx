@@ -57,12 +57,12 @@ const Cinema = () => {
 		isFetchingCinemas
 	}
 	return (
-		<div className="flex min-h-screen flex-col gap-6 bg-gradient-to-br from-gray-100 to-gray-300 pb-8 sm:gap-10">
+		<div className="flex min-h-screen flex-col gap-10 bg-gradient-to-br from-white via-gray-100 to-gray-200 text-gray-800 pb-10 sm:gap-14 font-sans">
 			<Navbar />
-			<div className="container mx-auto px-4">
+			<div className="container mx-auto px-6">
 				<CinemaLists {...props} />
 				{cinemas[selectedCinemaIndex]?.name && (
-					<div className="mt-8">
+					<div className="mt-10 shadow-lg rounded-xl p-6 bg-white">
 						<TheaterListsByCinema {...props} />
 					</div>
 				)}
@@ -70,5 +70,4 @@ const Cinema = () => {
 		</div>
 	)
 }
-
 export default Cinema

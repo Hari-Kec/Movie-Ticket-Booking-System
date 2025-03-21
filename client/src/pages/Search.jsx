@@ -311,13 +311,13 @@ const Search = () => {
 	const navigate = useNavigate()
 
 	return (
-		<div className="flex min-h-screen flex-col gap-4 bg-gradient-to-br from-indigo-900 to-blue-500 pb-8 text-gray-900 sm:gap-8">
+		<div className="flex min-h-screen flex-col gap-4 bg-gray-900 pb-8 text-white sm:gap-8">
 			<Navbar />
-			<div className="mx-4 flex h-fit flex-col gap-2 rounded-lg bg-gradient-to-br from-indigo-200 to-blue-100 p-4 drop-shadow-xl sm:mx-8 sm:p-6">
-				<h2 className="text-3xl font-bold text-gray-900">Search Showtimes</h2>
-				<div className="flex flex-col gap-2 rounded-md bg-gradient-to-br from-indigo-100 to-white p-4 transition-all duration-500 ease-in-out">
+			<div className="mx-4 flex h-fit flex-col gap-2 rounded-lg bg-gray-800 p-4 shadow-2xl sm:mx-8 sm:p-6">
+				<h2 className="text-3xl font-bold text-white">Search Showtimes</h2>
+				<div className="flex flex-col gap-2 rounded-md bg-gray-700 p-4 transition-all duration-500 ease-in-out">
 					<div className="flex items-center justify-between" onClick={() => setIsOpenFilter((prev) => !prev)}>
-						<div className="flex items-center gap-2 text-2xl font-bold text-gray-900">
+						<div className="flex items-center gap-2 text-2xl font-bold text-white">
 							<FunnelIcon className="h-6 w-6" />
 							Filter
 						</div>
@@ -329,9 +329,9 @@ const Search = () => {
 						)}
 					</div>
 					{isOpenFilter && (
-						<div className="">
+						<div className="space-y-4">
 							<div className="flex flex-col">
-								<h4 className="pt-1 text-lg font-bold text-gray-800">Cinema :</h4>
+								<h4 className="pt-1 text-lg font-bold text-gray-300">Cinema :</h4>
 								<Select
 									value={filterCinema}
 									options={Array.from(
@@ -352,7 +352,7 @@ const Search = () => {
 								/>
 							</div>
 							<div className="flex flex-col">
-								<h4 className="pt-1 text-lg font-bold text-gray-800">Theater :</h4>
+								<h4 className="pt-1 text-lg font-bold text-gray-300">Theater :</h4>
 								<Select
 									value={filterTheater}
 									options={Array.from(new Set(showtimes.map((showtime) => showtime.theater.number)))
@@ -372,7 +372,7 @@ const Search = () => {
 								/>
 							</div>
 							<div className="flex flex-col">
-								<h4 className="pt-1 text-lg font-bold text-gray-800">Movie :</h4>
+								<h4 className="pt-1 text-lg font-bold text-gray-300">Movie :</h4>
 								<Select
 									value={filterMovie}
 									options={Array.from(new Set(showtimes.map((showtime) => showtime.movie._id))).map(
@@ -392,7 +392,7 @@ const Search = () => {
 								/>
 							</div>
 							<div className="flex flex-col">
-								<h4 className="pt-1 text-lg font-bold text-gray-800">Date :</h4>
+								<h4 className="pt-1 text-lg font-bold text-gray-300">Date :</h4>
 								<Select
 									value={filterDate}
 									options={Array.from(
@@ -419,7 +419,7 @@ const Search = () => {
 									primaryColor="indigo"
 								/>
 								<div className="my-2 flex flex-col items-start gap-x-2 gap-y-1 sm:flex-row sm:items-center">
-									<label className="text-md font-semibold text-gray-800">From</label>
+									<label className="text-md font-semibold text-gray-300">From</label>
 									<Select
 										value={filterDateFrom}
 										options={Array.from(
@@ -435,7 +435,6 @@ const Search = () => {
 												})
 											)
 										)
-											// .filter((value) => !filterDateTo || new Date(filterDateTo.value) >= new Date(value))
 											.map((value) => ({
 												value,
 												label: value
@@ -448,7 +447,7 @@ const Search = () => {
 										isSearchable={true}
 										primaryColor="indigo"
 									/>
-									<label className="text-md font-semibold text-gray-800">To</label>
+									<label className="text-md font-semibold text-gray-300">To</label>
 									<Select
 										value={filterDateTo}
 										options={Array.from(
@@ -464,7 +463,6 @@ const Search = () => {
 												})
 											)
 										)
-											// .filter((value) => !filterDateFrom || new Date(filterDateFrom.value) <= new Date(value))
 											.map((value) => ({
 												value,
 												label: value
@@ -479,7 +477,7 @@ const Search = () => {
 									/>
 								</div>
 								<div className="flex flex-col items-start gap-x-8 gap-y-2 sm:flex-row sm:items-center">
-									<label className="text-md flex items-center justify-between gap-2 font-semibold text-gray-800">
+									<label className="text-md flex items-center justify-between gap-2 font-semibold text-gray-300">
 										Past Date
 										<input
 											type="checkbox"
@@ -493,7 +491,7 @@ const Search = () => {
 											}}
 										/>
 									</label>
-									<label className="text-md flex items-center justify-between gap-2 font-semibold text-gray-800">
+									<label className="text-md flex items-center justify-between gap-2 font-semibold text-gray-300">
 										Today
 										<input
 											type="checkbox"
@@ -507,7 +505,7 @@ const Search = () => {
 											}}
 										/>
 									</label>
-									<label className="text-md flex items-center justify-between gap-2 font-semibold text-gray-800">
+									<label className="text-md flex items-center justify-between gap-2 font-semibold text-gray-300">
 										Future Date
 										<input
 											type="checkbox"
@@ -524,7 +522,7 @@ const Search = () => {
 								</div>
 							</div>
 							<div className="flex flex-col">
-								<h4 className="pt-1 text-lg font-bold text-gray-800">Time :</h4>
+								<h4 className="pt-1 text-lg font-bold text-gray-300">Time :</h4>
 								<Select
 									value={filterTime}
 									options={Array.from(
@@ -552,7 +550,7 @@ const Search = () => {
 									primaryColor="indigo"
 								/>
 								<div className="my-2 flex flex-col items-start gap-x-2 gap-y-1 sm:flex-row sm:items-center">
-									<label className="text-md font-semibold text-gray-800">From</label>
+									<label className="text-md font-semibold text-gray-300">From</label>
 									<Select
 										value={filterTimeFrom}
 										options={Array.from(
@@ -581,7 +579,7 @@ const Search = () => {
 										isSearchable={true}
 										primaryColor="indigo"
 									/>
-									<label className="text-md font-semibold text-gray-800">To</label>
+									<label className="text-md font-semibold text-gray-300">To</label>
 									<Select
 										value={filterTimeTo}
 										options={Array.from(
@@ -613,9 +611,9 @@ const Search = () => {
 								</div>
 							</div>
 							<div className="flex flex-col">
-								<h4 className="pt-1 text-lg font-bold text-gray-800">Release :</h4>
+								<h4 className="pt-1 text-lg font-bold text-gray-300">Release :</h4>
 								<div className="mt-1 flex flex-col items-start gap-x-8 gap-y-2 sm:flex-row sm:items-center">
-									<label className="text-md flex items-center justify-between gap-2 font-semibold text-gray-800">
+									<label className="text-md flex items-center justify-between gap-2 font-semibold text-gray-300">
 										True
 										<input
 											type="checkbox"
@@ -628,7 +626,7 @@ const Search = () => {
 											}}
 										/>
 									</label>
-									<label className="text-md flex items-center justify-between gap-2 font-semibold text-gray-800">
+									<label className="text-md flex items-center justify-between gap-2 font-semibold text-gray-300">
 										False
 										<input
 											type="checkbox"
@@ -692,7 +690,7 @@ const Search = () => {
 							)}
 						</button>
 					</div>
-
+	
 					{isFetchingShowtimesDone && (
 						<div className="ml-auto flex items-center gap-1 px-1 text-sm font-medium">
 							<InformationCircleIcon className="h-5 w-5" /> Showing {filteredShowtimes.length} filtered
@@ -700,12 +698,12 @@ const Search = () => {
 						</div>
 					)}
 				</div>
-
+	
 				<div
-					className={`mb-4 grid max-h-screen overflow-auto rounded-md bg-gradient-to-br from-indigo-100 to-white`}
+					className="mb-4 grid max-h-screen overflow-auto rounded-md bg-gray-700"
 					style={{ gridTemplateColumns: '34px repeat(7, minmax(max-content, 1fr)) 104px' }}
 				>
-					<p className="sticky top-0 flex items-center justify-center rounded-tl-md bg-gradient-to-br from-gray-800 to-gray-700 text-center text-xl font-semibold text-white">
+					<p className="sticky top-0 flex items-center justify-center rounded-tl-md bg-gray-800 text-center text-xl font-semibold text-white">
 						<input
 							type="checkbox"
 							className="h-6 w-6"
@@ -726,7 +724,7 @@ const Search = () => {
 						/>
 					</p>
 					<button
-						className="sticky top-0 flex justify-center bg-gradient-to-br from-gray-800 to-gray-700 hover:from-gray-700 hover:to-gray-600 px-2 py-1 text-center text-xl font-semibold text-white"
+						className="sticky top-0 flex justify-center bg-gray-800 hover:bg-gray-700 px-2 py-1 text-center text-xl font-semibold text-white"
 						onClick={() => {
 							let prevValue = sortCinema
 							resetSort()
@@ -739,7 +737,7 @@ const Search = () => {
 						{sortCinema === -1 && <ChevronDownIcon className="ml-auto w-6 h-6" />}
 					</button>
 					<button
-						className="sticky top-0 flex justify-center bg-gradient-to-br from-gray-800 to-gray-700 hover:from-gray-700 hover:to-gray-600 px-2 py-1 text-center text-xl font-semibold text-white"
+						className="sticky top-0 flex justify-center bg-gray-800 hover:bg-gray-700 px-2 py-1 text-center text-xl font-semibold text-white"
 						onClick={() => {
 							let prevValue = sortTheater
 							resetSort()
@@ -752,7 +750,7 @@ const Search = () => {
 						{sortTheater === -1 && <ChevronDownIcon className="ml-auto w-6 h-6" />}
 					</button>
 					<button
-						className="sticky top-0 flex justify-center bg-gradient-to-br from-gray-800 to-gray-700 hover:from-gray-700 hover:to-gray-600 px-2 py-1 text-center text-xl font-semibold text-white"
+						className="sticky top-0 flex justify-center bg-gray-800 hover:bg-gray-700 px-2 py-1 text-center text-xl font-semibold text-white"
 						onClick={() => {
 							let prevValue = sortMovie
 							resetSort()
@@ -765,7 +763,7 @@ const Search = () => {
 						{sortMovie === -1 && <ChevronDownIcon className="ml-auto w-6 h-6" />}
 					</button>
 					<button
-						className="sticky top-0 flex justify-center bg-gradient-to-br from-gray-800 to-gray-700 hover:from-gray-700 hover:to-gray-600 px-2 py-1 text-center text-xl font-semibold text-white"
+						className="sticky top-0 flex justify-center bg-gray-800 hover:bg-gray-700 px-2 py-1 text-center text-xl font-semibold text-white"
 						onClick={() => {
 							let prevValue = sortDate
 							resetSort()
@@ -778,7 +776,7 @@ const Search = () => {
 						{sortDate === -1 && <ChevronDownIcon className="ml-auto w-6 h-6" />}
 					</button>
 					<button
-						className="sticky top-0 flex justify-center bg-gradient-to-br from-gray-800 to-gray-700 hover:from-gray-700 hover:to-gray-600 px-2 py-1 text-center text-xl font-semibold text-white"
+						className="sticky top-0 flex justify-center bg-gray-800 hover:bg-gray-700 px-2 py-1 text-center text-xl font-semibold text-white"
 						onClick={() => {
 							let prevValue = sortTime
 							resetSort()
@@ -791,7 +789,7 @@ const Search = () => {
 						{sortTime === -1 && <ChevronDownIcon className="ml-auto w-6 h-6" />}
 					</button>
 					<button
-						className="sticky top-0 flex justify-center bg-gradient-to-br from-gray-800 to-gray-700 hover:from-gray-700 hover:to-gray-600 px-2 py-1 text-center text-xl font-semibold text-white"
+						className="sticky top-0 flex justify-center bg-gray-800 hover:bg-gray-700 px-2 py-1 text-center text-xl font-semibold text-white"
 						onClick={() => {
 							let prevValue = sortBooked
 							resetSort()
@@ -804,7 +802,7 @@ const Search = () => {
 						{sortBooked === -1 && <ChevronDownIcon className="ml-auto w-6 h-6" />}
 					</button>
 					<button
-						className="sticky top-0 flex justify-center bg-gradient-to-br from-gray-800 to-gray-700 hover:from-gray-700 hover:to-gray-600 px-2 py-1 text-center text-xl font-semibold text-white"
+						className="sticky top-0 flex justify-center bg-gray-800 hover:bg-gray-700 px-2 py-1 text-center text-xl font-semibold text-white"
 						onClick={() => {
 							let prevValue = sortRelease
 							resetSort()
@@ -816,7 +814,7 @@ const Search = () => {
 						{sortRelease === 1 && <ChevronUpIcon className="ml-auto w-6 h-6" />}
 						{sortRelease === -1 && <ChevronDownIcon className="ml-auto w-6 h-6" />}
 					</button>
-					<p className="sticky top-0 z-[1] flex items-center justify-center gap-2 rounded-tr-md bg-gradient-to-br from-gray-800 to-gray-700 px-2 py-1 text-center text-xl font-semibold text-white">
+					<p className="sticky top-0 z-[1] flex items-center justify-center gap-2 rounded-tr-md bg-gray-800 px-2 py-1 text-center text-xl font-semibold text-white">
 						<MapIcon className="h-6 w-6" />
 						View
 					</p>
@@ -832,7 +830,7 @@ const Search = () => {
 							return (
 								<Fragment key={index}>
 									<div
-										className={`flex items-center justify-center border-t-2 border-indigo-200 ${
+										className={`flex items-center justify-center border-t-2 border-gray-600 ${
 											isCheckedRow && 'border-white bg-blue-200 text-blue-800'
 										}`}
 									>
@@ -852,45 +850,45 @@ const Search = () => {
 										/>
 									</div>
 									<div
-										className={`border-t-2 border-indigo-200 px-2 py-1 ${
+										className={`border-t-2 border-gray-600 px-2 py-1 ${
 											isCheckedRow && 'border-white bg-blue-200 text-blue-800'
 										}`}
 									>
 										{showtime.theater.cinema.name}
 									</div>
 									<div
-										className={`border-t-2 border-indigo-200 px-2 py-1 ${
+										className={`border-t-2 border-gray-600 px-2 py-1 ${
 											isCheckedRow && 'border-white bg-blue-200 text-blue-800'
 										}`}
 									>
 										{showtime.theater.number}
 									</div>
 									<div
-										className={`border-t-2 border-indigo-200 px-2 py-1 ${
+										className={`border-t-2 border-gray-600 px-2 py-1 ${
 											isCheckedRow && 'border-white bg-blue-200 text-blue-800'
 										}`}
 									>
 										{showtime.movie.name}
 									</div>
 									<div
-										className={`border-t-2 border-indigo-200 px-2 py-1 ${
+										className={`border-t-2 border-gray-600 px-2 py-1 ${
 											isCheckedRow && 'border-white bg-blue-200 text-blue-800'
 										}`}
 									>{`${day} ${month} ${year}`}</div>
 									<div
-										className={`border-t-2 border-indigo-200 px-2 py-1 ${
+										className={`border-t-2 border-gray-600 px-2 py-1 ${
 											isCheckedRow && 'border-white bg-blue-200 text-blue-800'
 										}`}
 									>{`${hours} : ${minutes}`}</div>
 									<div
-										className={`border-t-2 border-indigo-200 px-2 py-1 ${
+										className={`border-t-2 border-gray-600 px-2 py-1 ${
 											isCheckedRow && 'border-white bg-blue-200 text-blue-800'
 										}`}
 									>
 										{showtime.seats.length}
 									</div>
 									<div
-										className={`flex items-center gap-2 border-t-2 border-indigo-200 px-2 py-1 ${
+										className={`flex items-center gap-2 border-t-2 border-gray-600 px-2 py-1 ${
 											isCheckedRow && 'border-white bg-blue-200 text-blue-800'
 										}`}
 									>

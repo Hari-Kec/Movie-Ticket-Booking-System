@@ -1,8 +1,6 @@
 import axios from 'axios'
 import { createContext, useEffect, useState } from 'react'
-
 const AuthContext = createContext()
-
 const AuthContextProvider = ({ children }) => {
 	const [auth, setAuth] = useState(
 		JSON.parse(localStorage.getItem('auth')) || {
@@ -11,8 +9,7 @@ const AuthContextProvider = ({ children }) => {
 			role: null,
 			token: null
 		}
-	) //{username, email, role, token}
-
+	)
 	const getUser = async () => {
 		try {
 			if (!auth.token) return
@@ -21,7 +18,6 @@ const AuthContextProvider = ({ children }) => {
 					Authorization: `Bearer ${auth.token}`
 				}
 			})
-
 			const updatedAuth = {
 				...auth,
 				username: response.data.data.username,
@@ -40,13 +36,10 @@ const AuthContextProvider = ({ children }) => {
 			console.error(error)
 		}
 	}
-
 	useEffect(() => {
 		getUser()
 		localStorage.setItem('auth', JSON.stringify(auth))
 	}, [auth])
-
 	return <AuthContext.Provider value={{ auth, setAuth }}>{children}</AuthContext.Provider>
 }
-
 export { AuthContext, AuthContextProvider }
