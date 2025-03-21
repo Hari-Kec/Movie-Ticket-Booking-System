@@ -14,7 +14,7 @@ const AuthContextProvider = ({ children }) => {
 	const getUser = async () => {
 		try {
 			if (!auth.token) return
-			const response = await axios.get('${BASE_URL}/auth/me', {
+			const response = await axios.get(`${BASE_URL}/auth/me`, {
 				headers: {
 					Authorization: `Bearer ${auth.token}`
 				}

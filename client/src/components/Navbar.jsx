@@ -30,7 +30,7 @@ const Navbar = () => {
     const onLogout = async () => {
         try {
             SetLoggingOut(true);
-            await axios.get('${BASE_URL}/auth/logout');
+            await axios.get(`${BASE_URL}/auth/logout`);
             setAuth({ username: null, email: null, role: null, token: null });
             sessionStorage.clear();
             navigate('/');

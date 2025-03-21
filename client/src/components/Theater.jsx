@@ -73,7 +73,7 @@ const Theater = ({ theaterId, movies, selectedDate, filterMovie, setSelectedDate
 			const [hours, minutes] = data.showtime.split(':')
 			showtime.setHours(hours, minutes, 0)
 			const response = await axios.post(
-				'${BASE_URL}/showtime',
+				`${BASE_URL}/showtime`,
 				{ movie: data.movie, showtime, theater: theater._id, repeat: data.repeat, isRelease: data.isRelease },
 				{
 					headers: {

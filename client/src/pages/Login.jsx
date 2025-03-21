@@ -7,6 +7,7 @@ import 'react-toastify/dist/ReactToastify.css'
 import { AuthContext } from '../context/AuthContext'
 import { FaUser, FaLock } from 'react-icons/fa'
 import BASE_URL from '../config'
+
 const Login = () => {
 	const navigate = useNavigate()
 	const { auth, setAuth } = useContext(AuthContext)
@@ -22,7 +23,7 @@ const Login = () => {
 	const onSubmit = async (data) => {
 		SetLoggingIn(true)
 		try {
-			const response = await axios.post('${BASE_URL}/auth/login', data)
+			const response = await axios.post(`${BASE_URL}/auth/login`, data)
 			toast.success('Login successful!', {
 				position: 'top-center',
 				autoClose: 2000,

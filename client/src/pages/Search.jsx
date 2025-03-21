@@ -140,13 +140,13 @@ const Search = () => {
 			setIsFetchingShowtimesDone(false)
 			let response
 			if (auth.role === 'admin') {
-				response = await axios.get('${BASE_URL}/showtime/unreleased', {
+				response = await axios.get(`${BASE_URL}/showtime/unreleased`, {
 					headers: {
 						Authorization: `Bearer ${auth.token}`
 					}
 				})
 			} else {
-				response = await axios.get('${BASE_URL}/showtime')
+				response = await axios.get(`${BASE_URL}/showtime`)
 			}
 			// console.log(response.data.data)
 			setShowtimes(response.data.data)

@@ -38,11 +38,11 @@ const Schedule = () => {
       setIsFetchingCinemas(true)
       let response
       if (auth.role === 'admin') {
-        response = await axios.get('${BASE_URL}/cinema/unreleased', {
+        response = await axios.get(`${BASE_URL}/cinema/unreleased`, {
           headers: { Authorization: `Bearer ${auth.token}` }
         })
       } else {
-        response = await axios.get('${BASE_URL}/cinema')
+        response = await axios.get(`${BASE_URL}/cinema`)
       }
       setCinemas(response.data.data)
     } catch (error) {
@@ -58,7 +58,7 @@ const Schedule = () => {
 
   const fetchMovies = async () => {
     try {
-      const response = await axios.get('${BASE_URL}/movie')
+      const response = await axios.get(`${BASE_URL}/movie`)
       setMovies(response.data.data)
     } catch (error) {
       console.error(error)
@@ -86,7 +86,7 @@ const Schedule = () => {
       const [hours, minutes] = data.showtime.split(':')
       showtime.setHours(hours, minutes, 0)
       await axios.post(
-        '${BASE_URL}/showtime',
+        `${BASE_URL}/showtime`,
         { movie: data.movie, showtime, theater: data.theater, repeat: data.repeat, isRelease: data.isRelease },
         { headers: { Authorization: `Bearer ${auth.token}` } }
       )

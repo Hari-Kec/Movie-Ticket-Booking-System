@@ -38,7 +38,7 @@ const TheaterListsByCinema = ({ cinemas, selectedCinemaIndex, setSelectedCinemaI
 
 	const fetchMovies = async (data) => {
 		try {
-			const response = await axios.get('${BASE_URL}/movie')
+			const response = await axios.get(`${BASE_URL}/movie`)
 			// console.log(response.data.data)
 			setMovies(response.data.data)
 		} catch (error) {

@@ -31,7 +31,7 @@ const User = () => {
 
 	const fetchUsers = async () => {
 		try {
-			const response = await axios.get('${BASE_URL}/auth/user', {
+			const response = await axios.get(`${BASE_URL}/auth/user`, {
 				headers: {
 					Authorization: `Bearer ${auth.token}`
 				}

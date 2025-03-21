@@ -12,7 +12,7 @@ const Tickets = () => {
 	const fetchTickets = async () => {
 		try {
 			setIsFetchingticketsDone(false)
-			const response = await axios.get('${BASE_URL}/auth/tickets', {
+			const response = await axios.get(`${BASE_URL}/auth/tickets`, {
 				headers: {
 					Authorization: `Bearer ${auth.token}`
 				}

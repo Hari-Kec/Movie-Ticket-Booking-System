@@ -25,7 +25,7 @@ const Movie = () => {
 	const fetchMovies = async () => {
 		try {
 			setIsFetchingMoviesDone(false)
-			const response = await axios.get('${BASE_URL}/movie')
+			const response = await axios.get(`${BASE_URL}/movie`)
 			reset()
 			setMovies(response.data.data)
 		} catch (error) {
@@ -43,7 +43,7 @@ const Movie = () => {
 		try {
 			data.length = (parseInt(data.lengthHr) || 0) * 60 + (parseInt(data.lengthMin) || 0)
 			SetIsAddingMovie(true)
-			await axios.post('${BASE_URL}/movie', data, {
+			await axios.post(`${BASE_URL}/movie`, data, {
 				headers: {
 					Authorization: `Bearer ${auth.token}`
 				}

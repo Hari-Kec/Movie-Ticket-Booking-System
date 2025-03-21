@@ -19,13 +19,13 @@ const Cinema = () => {
 			setIsFetchingCinemas(true)
 			let response
 			if (auth.role === 'admin') {
-				response = await axios.get('${BASE_URL}/cinema/unreleased', {
+				response = await axios.get(`${BASE_URL}/cinema/unreleased`, {
 					headers: {
 						Authorization: `Bearer ${auth.token}`
 					}
 				})
 			} else {
-				response = await axios.get('${BASE_URL}/cinema')
+				response = await axios.get(`${BASE_URL}/cinema`)
 			}
 
 			setCinemas(response.data.data)
