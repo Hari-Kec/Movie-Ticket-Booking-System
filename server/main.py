@@ -7,11 +7,12 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["https://splendid-raindrop-233224.netlify.app"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
 
 GROQ_API_KEY = "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"
 groq_client = Groq(api_key=GROQ_API_KEY)
