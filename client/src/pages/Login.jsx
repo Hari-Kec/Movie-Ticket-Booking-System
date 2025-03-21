@@ -29,7 +29,11 @@ const Login = () => {
 				autoClose: 2000,
 				pauseOnHover: false
 			})
-			setAuth((prev) => ({ ...prev, token: response.data.token }))
+			setAuth((prev) => ({
+				...prev,
+				token: response.data.token,
+				user: response.data.user
+			  }))
 			navigate('/')
 		} catch (error) {
 			setErrorsMessage(error.response.data)

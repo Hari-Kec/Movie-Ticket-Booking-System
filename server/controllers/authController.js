@@ -46,6 +46,16 @@ exports.login = async (req, res, next) => {
 		if (!isMatch) {
 			return res.status(401).json('Invalid credentials')
 		}
+		const token = user.getSignedJwtToken()
+		res.status(200).json({
+			success: true,
+			token,
+			user: {
+			  username: user.username,
+			  email: user.email,
+			  role: user.role
+			}
+		  })
 
 		sendTokenResponse(user, 200, res)
 	} catch (err) {
