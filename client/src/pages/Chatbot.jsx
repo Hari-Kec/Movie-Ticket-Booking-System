@@ -10,7 +10,7 @@ const Chatbot = () => {
 		if (!query.trim()) return
 		const userMsg = { sender: 'user', text: query }
 		setMessages((prev) => [...prev, userMsg])
-		const res = await axios.post('http://localhost:8000/chat', { query })
+		const res = await axios.post('https://movie-ticket-booking-system-1-nvtl.onrender.com/chat', { query })
 		setMessages((prev) => [...prev, { sender: 'bot', text: res.data.response }])
 		setQuery('')
 	}
