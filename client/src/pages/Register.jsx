@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { FaUser, FaEnvelope, FaLock } from 'react-icons/fa'
-
+import BASE_URL from '../config'
 const Register = () => {
 	const navigate = useNavigate()
 	const [errorsMessage, setErrorsMessage] = useState('')
@@ -20,7 +20,7 @@ const Register = () => {
 	const onSubmit = async (data) => {
 		SetIsRegistering(true)
 		try {
-			const response = await axios.post('/auth/register', data)
+			const response = await axios.post('${BASE_URL}/auth/register', data)
 			toast.success('Registration successful!', {
 				position: 'top-center',
 				autoClose: 2000,

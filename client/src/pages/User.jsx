@@ -12,7 +12,7 @@ import { toast } from 'react-toastify'
 import Navbar from '../components/Navbar'
 import ShowtimeDetails from '../components/ShowtimeDetails'
 import { AuthContext } from '../context/AuthContext'
-
+import BASE_URL from '../config'
 const User = () => {
 	const { auth } = useContext(AuthContext)
 	const [users, setUsers] = useState(null)
@@ -31,7 +31,7 @@ const User = () => {
 
 	const fetchUsers = async () => {
 		try {
-			const response = await axios.get('/auth/user', {
+			const response = await axios.get('${BASE_URL}/auth/user', {
 				headers: {
 					Authorization: `Bearer ${auth.token}`
 				}
@@ -49,7 +49,7 @@ const User = () => {
 	const onUpdateUser = async (data) => {
 		try {
 			SetIsUpdating(true)
-			const response = await axios.put(`/auth/user/${data.id}`, data, {
+			const response = await axios.put(`${BASE_URL}/auth/user/${data.id}`, data, {
 				headers: {
 					Authorization: `Bearer ${auth.token}`
 				}
@@ -82,7 +82,7 @@ const User = () => {
 	const onDeleteUser = async (data) => {
 		try {
 			SetIsDeleting(true)
-			await axios.delete(`/auth/user/${data.id}`, {
+			await axios.delete(`${BASE_URL}/auth/user/${data.id}`, {
 				headers: {
 					Authorization: `Bearer ${auth.token}`
 				}

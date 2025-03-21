@@ -10,7 +10,7 @@ import Loading from '../components/Loading'
 import Navbar from '../components/Navbar'
 import ScheduleTable from '../components/ScheduleTable'
 import { AuthContext } from '../context/AuthContext'
-
+import BASE_URL from '../config'
 const Schedule = () => {
   const { auth } = useContext(AuthContext)
   const {
@@ -38,11 +38,11 @@ const Schedule = () => {
       setIsFetchingCinemas(true)
       let response
       if (auth.role === 'admin') {
-        response = await axios.get('/cinema/unreleased', {
+        response = await axios.get('${BASE_URL}/cinema/unreleased', {
           headers: { Authorization: `Bearer ${auth.token}` }
         })
       } else {
-        response = await axios.get('/cinema')
+        response = await axios.get('${BASE_URL}/cinema')
       }
       setCinemas(response.data.data)
     } catch (error) {
@@ -58,7 +58,7 @@ const Schedule = () => {
 
   const fetchMovies = async () => {
     try {
-      const response = await axios.get('/movie')
+      const response = await axios.get('${BASE_URL}/movie')
       setMovies(response.data.data)
     } catch (error) {
       console.error(error)
@@ -86,7 +86,7 @@ const Schedule = () => {
       const [hours, minutes] = data.showtime.split(':')
       showtime.setHours(hours, minutes, 0)
       await axios.post(
-        '/showtime',
+        '${BASE_URL}/showtime',
         { movie: data.movie, showtime, theater: data.theater, repeat: data.repeat, isRelease: data.isRelease },
         { headers: { Authorization: `Bearer ${auth.token}` } }
       )

@@ -5,7 +5,7 @@ import CinemaLists from '../components/CinemaLists'
 import Navbar from '../components/Navbar'
 import TheaterListsByCinema from '../components/TheaterListsByCinema'
 import { AuthContext } from '../context/AuthContext'
-
+import BASE_URL from '../config'
 const Cinema = () => {
 	const { auth } = useContext(AuthContext)
 	const [selectedCinemaIndex, setSelectedCinemaIndex] = useState(
@@ -19,13 +19,13 @@ const Cinema = () => {
 			setIsFetchingCinemas(true)
 			let response
 			if (auth.role === 'admin') {
-				response = await axios.get('/cinema/unreleased', {
+				response = await axios.get('${BASE_URL}/cinema/unreleased', {
 					headers: {
 						Authorization: `Bearer ${auth.token}`
 					}
 				})
 			} else {
-				response = await axios.get('/cinema')
+				response = await axios.get('${BASE_URL}/cinema')
 			}
 
 			setCinemas(response.data.data)

@@ -1,4 +1,5 @@
 import axios from 'axios'
+import BASE_URL from '../config'
 import { createContext, useEffect, useState } from 'react'
 const AuthContext = createContext()
 const AuthContextProvider = ({ children }) => {
@@ -13,7 +14,7 @@ const AuthContextProvider = ({ children }) => {
 	const getUser = async () => {
 		try {
 			if (!auth.token) return
-			const response = await axios.get('/auth/me', {
+			const response = await axios.get('${BASE_URL}/auth/me', {
 				headers: {
 					Authorization: `Bearer ${auth.token}`
 				}

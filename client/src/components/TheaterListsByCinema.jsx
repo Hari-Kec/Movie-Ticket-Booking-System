@@ -12,7 +12,7 @@ import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import DateSelector from './DateSelector'
 import Theater from './Theater'
-
+import BASE_URL from '../config'
 const TheaterListsByCinema = ({ cinemas, selectedCinemaIndex, setSelectedCinemaIndex, fetchCinemas, auth }) => {
 	const {
 		register,
@@ -38,7 +38,7 @@ const TheaterListsByCinema = ({ cinemas, selectedCinemaIndex, setSelectedCinemaI
 
 	const fetchMovies = async (data) => {
 		try {
-			const response = await axios.get('/movie')
+			const response = await axios.get('${BASE_URL}/movie')
 			// console.log(response.data.data)
 			setMovies(response.data.data)
 		} catch (error) {
@@ -67,7 +67,7 @@ const TheaterListsByCinema = ({ cinemas, selectedCinemaIndex, setSelectedCinemaI
 	const onDeleteCinema = async (id) => {
 		try {
 			SetIsDeleting(true)
-			const response = await axios.delete(`/cinema/${id}`, {
+			const response = await axios.delete(`${BASE_URL}/cinema/${id}`, {
 				headers: {
 					Authorization: `Bearer ${auth.token}`
 				}
@@ -96,7 +96,7 @@ const TheaterListsByCinema = ({ cinemas, selectedCinemaIndex, setSelectedCinemaI
 		try {
 			SetIsIncreaseing(true)
 			const response = await axios.post(
-				`/theater`,
+				`${BASE_URL}/theater`,
 				{
 					cinema: cinemas[selectedCinemaIndex]._id,
 					number: cinemas[selectedCinemaIndex].theaters.length + 1,
@@ -140,7 +140,7 @@ const TheaterListsByCinema = ({ cinemas, selectedCinemaIndex, setSelectedCinemaI
 	const onDecreaseTheater = async () => {
 		try {
 			SetIsDecreasing(true)
-			const response = await axios.delete(`/theater/${cinemas[selectedCinemaIndex].theaters.slice(-1)[0]._id}`, {
+			const response = await axios.delete(`${BASE_URL}/theater/${cinemas[selectedCinemaIndex].theaters.slice(-1)[0]._id}`, {
 				headers: {
 					Authorization: `Bearer ${auth.token}`
 				}
@@ -167,7 +167,7 @@ const TheaterListsByCinema = ({ cinemas, selectedCinemaIndex, setSelectedCinemaI
 	const onEditCinema = async (data) => {
 		try {
 			const response = await axios.put(
-				`/cinema/${cinemas[selectedCinemaIndex]._id}`,
+				`${BASE_URL}/cinema/${cinemas[selectedCinemaIndex]._id}`,
 				{
 					name: data.name
 				},

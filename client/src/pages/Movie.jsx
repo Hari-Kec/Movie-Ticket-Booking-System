@@ -7,7 +7,7 @@ import Loading from '../components/Loading'
 import MovieLists from '../components/MovieLists'
 import Navbar from '../components/Navbar'
 import { AuthContext } from '../context/AuthContext'
-
+import BASE_URL from '../config'
 const Movie = () => {
 	const { auth } = useContext(AuthContext)
 	const {
@@ -25,7 +25,7 @@ const Movie = () => {
 	const fetchMovies = async () => {
 		try {
 			setIsFetchingMoviesDone(false)
-			const response = await axios.get('/movie')
+			const response = await axios.get('${BASE_URL}/movie')
 			reset()
 			setMovies(response.data.data)
 		} catch (error) {
@@ -43,7 +43,7 @@ const Movie = () => {
 		try {
 			data.length = (parseInt(data.lengthHr) || 0) * 60 + (parseInt(data.lengthMin) || 0)
 			SetIsAddingMovie(true)
-			await axios.post('/movie', data, {
+			await axios.post('${BASE_URL}/movie', data, {
 				headers: {
 					Authorization: `Bearer ${auth.token}`
 				}
@@ -77,7 +77,7 @@ const Movie = () => {
 
 	const onDeleteMovie = async (id) => {
 		try {
-			await axios.delete(`/movie/${id}`, {
+			await axios.delete(`${BASE_URL}/movie/${id}`, {
 				headers: {
 					Authorization: `Bearer ${auth.token}`
 				}

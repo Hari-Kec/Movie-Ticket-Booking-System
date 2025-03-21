@@ -5,7 +5,7 @@ import { toast } from 'react-toastify'
 import Navbar from '../components/Navbar'
 import ShowtimeDetails from '../components/ShowtimeDetails'
 import { AuthContext } from '../context/AuthContext'
-
+import BASE_URL from '../config'
 const Purchase = () => {
   const navigate = useNavigate()
   const { auth } = useContext(AuthContext)
@@ -24,7 +24,7 @@ const Purchase = () => {
     setIsPurchasing(true)
     try {
       await axios.post(
-        `/showtime/${showtime._id}`,
+        `${BASE_URL}/showtime/${showtime._id}`,
         { seats: selectedSeats, paymentMethod, paymentDetails },
         {
           headers: {

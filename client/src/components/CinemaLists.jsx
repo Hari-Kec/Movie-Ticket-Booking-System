@@ -5,6 +5,8 @@ import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import Loading from './Loading'
+import BASE_URL from '../config' // adjust path accordingly
+
 const CinemaLists = ({
 	cinemas,
 	selectedCinemaIndex,
@@ -26,7 +28,7 @@ const CinemaLists = ({
 	const onAddCinema = async (data) => {
 		try {
 			SetIsAdding(true)
-			const response = await axios.post('/cinema', data, {
+			const response = await axios.post(`${BASE_URL}/cinema`, data, {
 				headers: {
 					Authorization: `Bearer ${auth.token}`
 				}

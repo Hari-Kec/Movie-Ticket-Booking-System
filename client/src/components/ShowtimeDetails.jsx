@@ -5,7 +5,7 @@ import { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { AuthContext } from '../context/AuthContext'
-
+import BASE_URL from '../config'
 const ShowtimeDetails = ({ showDeleteBtn, showtime, fetchShowtime }) => {
 	const { auth } = useContext(AuthContext)
 	const navigate = useNavigate()
@@ -23,7 +23,7 @@ const ShowtimeDetails = ({ showDeleteBtn, showtime, fetchShowtime }) => {
 	const onDeleteShowtime = async () => {
 		try {
 			SetIsDeletingShowtimes(true)
-			const response = await axios.delete(`/showtime/${showtime._id}`, {
+			const response = await axios.delete(`${BASE_URL}/showtime/${showtime._id}`, {
 				headers: {
 					Authorization: `Bearer ${auth.token}`
 				}
@@ -58,7 +58,7 @@ const ShowtimeDetails = ({ showDeleteBtn, showtime, fetchShowtime }) => {
 		setIsReleasingShowtime(true)
 		try {
 			const response = await axios.put(
-				`/showtime/${showtime._id}`,
+				`${BASE_URL}/showtime/${showtime._id}`,
 				{ isRelease: true },
 				{
 					headers: {
@@ -95,7 +95,7 @@ const ShowtimeDetails = ({ showDeleteBtn, showtime, fetchShowtime }) => {
 		setIsUnreleasingShowtime(true)
 		try {
 			const response = await axios.put(
-				`/showtime/${showtime._id}`,
+				`${BASE_URL}/showtime/${showtime._id}`,
 				{ isRelease: false },
 				{
 					headers: {

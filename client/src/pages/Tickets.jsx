@@ -4,7 +4,7 @@ import Loading from '../components/Loading'
 import Navbar from '../components/Navbar'
 import ShowtimeDetails from '../components/ShowtimeDetails'
 import { AuthContext } from '../context/AuthContext'
-
+import BASE_URL from '../config'
 const Tickets = () => {
 	const { auth } = useContext(AuthContext)
 	const [tickets, setTickets] = useState([])
@@ -12,7 +12,7 @@ const Tickets = () => {
 	const fetchTickets = async () => {
 		try {
 			setIsFetchingticketsDone(false)
-			const response = await axios.get('/auth/tickets', {
+			const response = await axios.get('${BASE_URL}/auth/tickets', {
 				headers: {
 					Authorization: `Bearer ${auth.token}`
 				}

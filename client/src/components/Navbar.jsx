@@ -15,7 +15,7 @@ import { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { AuthContext } from '../context/AuthContext';
-
+import BASE_URL from '../config'
 const Navbar = () => {
     const { auth, setAuth } = useContext(AuthContext);
     const [menuOpen, setMenuOpen] = useState(false);
@@ -30,7 +30,7 @@ const Navbar = () => {
     const onLogout = async () => {
         try {
             SetLoggingOut(true);
-            await axios.get('/auth/logout');
+            await axios.get('${BASE_URL}/auth/logout');
             setAuth({ username: null, email: null, role: null, token: null });
             sessionStorage.clear();
             navigate('/');

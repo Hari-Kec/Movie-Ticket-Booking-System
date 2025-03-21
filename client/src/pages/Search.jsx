@@ -17,7 +17,7 @@ import { toast } from 'react-toastify'
 import Loading from '../components/Loading'
 import Navbar from '../components/Navbar'
 import { AuthContext } from '../context/AuthContext'
-
+import BASE_URL from '../config'
 const Search = () => {
 	const { auth } = useContext(AuthContext)
 	const [isOpenFilter, setIsOpenFilter] = useState(true)
@@ -140,13 +140,13 @@ const Search = () => {
 			setIsFetchingShowtimesDone(false)
 			let response
 			if (auth.role === 'admin') {
-				response = await axios.get('/showtime/unreleased', {
+				response = await axios.get('${BASE_URL}/showtime/unreleased', {
 					headers: {
 						Authorization: `Bearer ${auth.token}`
 					}
 				})
 			} else {
-				response = await axios.get('/showtime')
+				response = await axios.get('${BASE_URL}/showtime')
 			}
 			// console.log(response.data.data)
 			setShowtimes(response.data.data)
@@ -177,7 +177,7 @@ const Search = () => {
 		let errorCounter = 0
 		const deletePromises = checkedShowtimes.map(async (checkedShowtime) => {
 			try {
-				const response = await axios.delete(`/showtime/${checkedShowtime}`, {
+				const response = await axios.delete(`${BASE_URL}/showtime/${checkedShowtime}`, {
 					headers: {
 						Authorization: `Bearer ${auth.token}`
 					}
@@ -222,7 +222,7 @@ const Search = () => {
 		const releasePromises = checkedShowtimes.map(async (checkedShowtime) => {
 			try {
 				const response = await axios.put(
-					`/showtime/${checkedShowtime}`,
+					`${BASE_URL}/showtime/${checkedShowtime}`,
 					{ isRelease: true },
 					{
 						headers: {
@@ -270,7 +270,7 @@ const Search = () => {
 		const releasePromises = checkedShowtimes.map(async (checkedShowtime) => {
 			try {
 				const response = await axios.put(
-					`/showtime/${checkedShowtime}`,
+					`${BASE_URL}/showtime/${checkedShowtime}`,
 					{ isRelease: false },
 					{
 						headers: {

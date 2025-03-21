@@ -6,7 +6,7 @@ import NowShowing from '../components/NowShowing'
 import TheaterListsByMovie from '../components/TheaterListsByMovie'
 import { AuthContext } from '../context/AuthContext'
 import Chatbot from './Chatbot'
-
+import BASE_URL from '../config'
 const Home = () => {
 	const { auth } = useContext(AuthContext)
 	const [selectedMovieIndex, setSelectedMovieIndex] = useState(parseInt(sessionStorage.getItem('selectedMovieIndex')))
@@ -18,13 +18,13 @@ const Home = () => {
 			setIsFetchingMoviesDone(false)
 			let response
 			if (auth.role === 'admin') {
-				response = await axios.get('/movie/unreleased/showing', {
+				response = await axios.get('${BASE_URL}/movie/unreleased/showing', {
 					headers: {
 						Authorization: `Bearer ${auth.token}`
 					}
 				})
 			} else {
-				response = await axios.get('/movie/showing')
+				response = await axios.get('${BASE_URL}/movie/showing')
 			}
 			setMovies(response.data.data)
 		} catch (error) {

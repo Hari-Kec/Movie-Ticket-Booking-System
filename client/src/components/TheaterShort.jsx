@@ -4,7 +4,7 @@ import { useContext, useEffect, useState } from 'react'
 import { AuthContext } from '../context/AuthContext'
 import Loading from './Loading'
 import Showtimes from './Showtimes'
-
+import BASE_URL from '../config'
 const TheaterShort = ({ theaterId, movies, selectedDate, filterMovie, rounded = false }) => {
 	const { auth } = useContext(AuthContext)
 	const [theater, setTheater] = useState({})
@@ -15,13 +15,13 @@ const TheaterShort = ({ theaterId, movies, selectedDate, filterMovie, rounded = 
 			setIsFetchingTheaterDone(false)
 			let response
 			if (auth.role === 'admin') {
-				response = await axios.get(`/theater/unreleased/${theaterId}`, {
+				response = await axios.get(`${BASE_URL}/theater/unreleased/${theaterId}`, {
 					headers: {
 						Authorization: `Bearer ${auth.token}`
 					}
 				})
 			} else {
-				response = await axios.get(`/theater/${theaterId}`)
+				response = await axios.get(`${BASE_URL}/theater/${theaterId}`)
 			}
 			// console.log(response.data.data)
 			setTheater(response.data.data)

@@ -9,7 +9,7 @@ import Navbar from '../components/Navbar'
 import Seat from '../components/Seat'
 import ShowtimeDetails from '../components/ShowtimeDetails'
 import { AuthContext } from '../context/AuthContext'
-
+import BASE_URL from '../config'
 const Showtime = () => {
 	const { auth } = useContext(AuthContext)
 	const { id } = useParams()
@@ -40,13 +40,13 @@ const Showtime = () => {
 		try {
 			let response
 			if (auth.role === 'admin') {
-				response = await axios.get(`/showtime/user/${id}`, {
+				response = await axios.get(`${BASE_URL}/showtime/user/${id}`, {
 					headers: {
 						Authorization: `Bearer ${auth.token}`
 					}
 				})
 			} else {
-				response = await axios.get(`/showtime/${id}`)
+				response = await axios.get(`${BASE_URL}/showtime/${id}`)
 			}
 			// console.log(response.data.data)
 			setShowtime(response.data.data)

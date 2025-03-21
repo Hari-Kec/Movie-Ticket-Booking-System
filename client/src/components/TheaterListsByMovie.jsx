@@ -5,7 +5,7 @@ import CinemaLists from './CinemaLists'
 import DateSelector from './DateSelector'
 import Loading from './Loading'
 import TheaterShort from './TheaterShort'
-
+import BASE_URL from '../config'
 const TheaterListsByMovie = ({ movies, selectedMovieIndex, setSelectedMovieIndex, auth }) => {
 	const [selectedDate, setSelectedDate] = useState(
 		(sessionStorage.getItem('selectedDate') && new Date(sessionStorage.getItem('selectedDate'))) || new Date()
@@ -23,13 +23,13 @@ const TheaterListsByMovie = ({ movies, selectedMovieIndex, setSelectedMovieIndex
 			setIsFetchingCinemas(true)
 			let response
 			if (auth.role === 'admin') {
-				response = await axios.get('/cinema/unreleased', {
+				response = await axios.get('${BASE_URL}/cinema/unreleased', {
 					headers: {
 						Authorization: `Bearer ${auth.token}`
 					}
 				})
 			} else {
-				response = await axios.get('/cinema')
+				response = await axios.get('${BASE_URL}/cinema')
 			}
 			// console.log(response.data.data)
 			setCinemas(response.data.data)
@@ -50,7 +50,7 @@ const TheaterListsByMovie = ({ movies, selectedMovieIndex, setSelectedMovieIndex
 			let response
 			if (auth.role === 'admin') {
 				response = await axios.get(
-					`/theater/movie/unreleased/${
+					`${BASE_URL}/theater/movie/unreleased/${
 						movies[selectedMovieIndex]._id
 					}/${selectedDate.toISOString()}/${new Date().getTimezoneOffset()}`,
 					{
@@ -61,7 +61,7 @@ const TheaterListsByMovie = ({ movies, selectedMovieIndex, setSelectedMovieIndex
 				)
 			} else {
 				response = await axios.get(
-					`/theater/movie/${
+					`${BASE_URL}/theater/movie/${
 						movies[selectedMovieIndex]._id
 					}/${selectedDate.toISOString()}/${new Date().getTimezoneOffset()}`
 				)
